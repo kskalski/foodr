@@ -1,0 +1,9 @@
+<h1>Editing supplier</h1>
+
+<% form_tag :action => 'update', :id => @supplier do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @supplier %> |
+<%= link_to 'Back', :action => 'list' %>
