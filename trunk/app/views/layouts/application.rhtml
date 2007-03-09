@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Orders: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'table' %>  
+</head>
+<body>
+
+<div id = 'menu'>
+  <h1>Foodr</h1>
+  <%= link_to 'Orders', :action => 'list', :controller => 'orders' %> |
+  <%= link_to 'Suppliers', :action => 'list', :controller => 'suppliers' %>
+</div>
+
+<hr/>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield  %>
+
+<hr/>
+
+</body>
+</html>

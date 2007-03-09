@@ -1,0 +1,15 @@
+<%= error_messages_for 'order_position' %>
+
+<!--[form:order_position]-->
+<p><label for="order_position_receiver_email">Receiver email</label><br/>
+<%= text_field 'order_position', 'receiver_email'  %></p>
+
+<p><label for="order_position_material_id">Material</label><br/>
+<select id="order_position_material_id" name="order_position[material_id]">
+  <%= options_from_collection_for_select @all_materials, :id, :name, @order_position.material_id %>
+</select></p>
+
+<p><label for="order_position_debt_for_orderer">Debt for orderer</label><br/>
+<%= text_field 'order_position', 'debt_for_orderer'  %></p>
+<!--[eoform:order_position]-->
+

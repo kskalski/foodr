@@ -1,0 +1,7 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  order_id: 1
+  receiver_email: foo@bar.pl
+  material_id: 1
+  debt_for_orderer: 0.0

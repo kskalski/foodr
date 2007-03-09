@@ -1,0 +1,11 @@
+<p>
+  <b>Material:</b> <%=h @order_position.material.name %>
+</p>
+<% for column in OrderPosition.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @order_position.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @order_position %> |
+<%= link_to 'Back', :action => 'show', :controller => 'orders', :id => @order %>

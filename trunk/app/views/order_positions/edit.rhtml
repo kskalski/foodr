@@ -1,0 +1,11 @@
+<h1>Editing order_position</h1>
+
+<% form_tag :action => 'update', :id => @order_position do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<hr/>
+
+<%= link_to 'Show', :action => 'show', :id => @order_position %> |
+<%= link_to 'Back', :action => 'show', :controller => 'orders', :id => @order %>

@@ -1,0 +1,68 @@
+table{
+	border-collapse: collapse;
+/*	margin: 1em auto; */
+	clear: left;
+	font: 100%/130% "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+}
+
+table caption{
+	background: #F6F4F1;
+	color: #110;
+	border: 1px solid #F2EDDA;
+	font-size: 110%;
+	letter-spacing: .1em;
+	padding: .5em;
+}
+
+th{
+	background: #A58F6C;
+	border: 1px solid #F2EDDA;
+	color: #F5F4F0;
+	font-weight: normal;
+	padding: .4em;
+	text-align: left;
+	text-transform: capitalize;
+}
+
+th[scope="col"]{
+background: #110;
+}
+
+
+th[scope="row"]{
+background: #A58F6C;
+
+}
+
+th[scope="row"] a{
+color: #F5F4F1;
+
+}
+
+td a:link{
+color: #A58F6C;
+}
+th a:visited, td a:visited{
+color: #110;
+}
+
+th a:hover, td a:hover{
+text-decoration: none;
+}
+
+
+td{
+	background: #F6F4F1;
+	color: #110;
+	border: 1px solid #F2EDDA;
+	padding: .4em;
+}
+
+tr.odd td{
+	background: #FFF;
+}
+
+tfoot th, tfoot td{
+	background: #110 !important;
+	color: #F5F4F1;
+}

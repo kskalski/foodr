@@ -1,0 +1,44 @@
+<p>
+  <b>Supplier:</b> <%=h @order.supplier.name %>
+</p>
+<% for column in Order.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @order.send(column.name) %>
+</p>
+<% end %>
+
+<h2>Order positions</h2>
+
+<table>
+  <tr>
+  <% for column in OrderPosition.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+    <th>Material</th>
+    <th colspan=3>Action</th>
+  </tr>
+  
+<% for order_position in @order.order_positions %>
+  <tr>
+  <% for column in OrderPosition.content_columns %>
+    <td><%=h order_position.send(column.name) %></td>
+  <% end %>
+    <td><%=h order_position.material.name %></td>
+    <td><%= link_to 'Show', :controller => 'order_positions', :action => 'show', :order => @order, :id => order_position %></td>
+    <td><%= link_to 'Edit', :controller => 'order_positions', :action => 'edit', :order => @order, :id => order_position %></td>
+    <td><%= link_to 'Destroy', { :controller => 'order_positions', :action => 'destroy', :order => @order, :id => order_position }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New position', :controller => 'order_positions', :action => 'new', :order => @order %> |
+<%= link_to 'Send order', { :action => 'send_order', :id => @order }, :confirm => 'Really send order?' %> |
+<%= link_to 'Mark as received', { :action => 'received', :id => @order }, :confirm => 'You mean FOOD IS THERE?' %> 
+
+
+<hr/>
+
+<%= link_to 'Edit', :action => 'edit', :id => @order %> |
+<%= link_to 'Back', :action => 'list' %>

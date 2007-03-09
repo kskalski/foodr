@@ -1,0 +1,18 @@
+<%= error_messages_for 'order' %>
+
+<!--[form:order]-->
+<p><label for="order_delivery_date">Delivery date</label><br/>
+<%= date_select 'order', 'delivery_date'  %></p>
+
+<p><label for="order_supplier_id">Supplier</label><br/>
+<select id="orders_supplier_id" name="order[supplier_id]">
+  <%= options_from_collection_for_select @all_suppliers, :id, :name, @order.supplier_id %>
+</select></p>
+
+<p><label for="order_orderer">Orderer</label><br/>
+<%= text_field 'order', 'orderer'  %></p>
+
+<p><label for="order_comments">Comments</label><br/>
+<%= text_area 'order', 'comments'  %></p>
+<!--[eoform:order]-->
+
