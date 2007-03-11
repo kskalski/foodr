@@ -7,6 +7,22 @@
 </p>
 <% end %>
 
+<% if !@order.order_positions.empty? %>
+
+<h2>Statistics</h2>
+
+  <p>
+    <b>Total worth:</b> <%= @order.total_value %>
+  </p>
+
+  <table>
+    <tr><th>Material</th><th>Quantity</th></tr>
+  <% for entry in @order.material_stats %>
+    <tr><td><%=h entry[0] %></td><td> <%=h entry[1] %> </td> </tr>
+  <% end %>
+  </table>
+<% end %>
+
 <h2>Order positions</h2>
 
 <table>

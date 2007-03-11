@@ -4,3 +4,21 @@ first:
   name: Zestaw 1
   price: 9.5
   supplier_id: 1
+  
+sumworth1:
+  id: 2
+  name: Foo1
+  price: 1.34
+  supplier_id: 2
+  
+sumworth2:
+  id: 3
+  name: Foo2
+  price: 3.01
+  supplier_id: 2
+
+sumworth3:
+  id: 4
+  name: Foo3
+  price: 4.05
+  supplier_id: 2
