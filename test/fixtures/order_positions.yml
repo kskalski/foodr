@@ -5,3 +5,35 @@ first:
   receiver_email: foo@bar.pl
   material_id: 1
   debt_for_orderer: 0.0
+
+sumworth1:
+  id: 2
+  order_id: 2
+  receiver_email: foo1@bar.pl
+  material_id: 2
+  material_price: 1.34 
+  debt_for_orderer: 0.0
+
+sumworth2:
+  id: 3
+  order_id: 2
+  receiver_email: foo2@bar.pl
+  material_id: 3
+  material_price: 3.01
+  debt_for_orderer: 0.0
+
+sumworth3:
+  id: 4
+  order_id: 2
+  receiver_email: foo3@bar.pl
+  material_id: 4
+  material_price: 4.05
+  debt_for_orderer: 0.0
+
+sumworth4:
+  id: 5
+  order_id: 2
+  receiver_email: foo4@bar.pl
+  material_id: 3
+  material_price: 3.01
+  debt_for_orderer: 0.0

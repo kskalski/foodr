@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @order_pages, @orders = paginate :orders, :per_page => 10
+    @order_pages, @orders = paginate :orders, :order => 'delivery_date DESC', :per_page => 10
   end
 
   def show
