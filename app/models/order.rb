@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   validates_format_of :orderer, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :supplier_id, :scope => 'delivery_date'
   
-  has_many :order_positions, :order => 'material_id'
+  has_many :order_positions, :order => 'material_id', :dependent => :delete_all
   belongs_to :supplier
   
   def material_stats

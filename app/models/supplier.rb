@@ -4,5 +4,5 @@ class Supplier < ActiveRecord::Base
   validates_uniqueness_of :name, 
                           :email, :if => '!@email.nil?'
   
-  has_many :materials
+  has_many :materials, :order => 'name', :dependent => :delete_all
 end
