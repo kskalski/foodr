@@ -24,8 +24,7 @@ class Order < ActiveRecord::Base
   end
   
   def received
-    for pos in order_positions
-      FoodMailer::deliver_received(pos.receiver_email, supplier.name, orderer, pos.material.name)
-    end
+    recip = order_positions.map { |pos| pos.receiver_email }
+    FoodMailer::deliver_received(recip, supplier.name, orderer)
   end
 end
