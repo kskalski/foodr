@@ -31,6 +31,7 @@ class OrderTest < Test::Unit::TestCase
     order = Order.find(orders(:sumworth).id)
     num_deliveries = FoodMailer.deliveries.size
     order.received
-    assert_equal num_deliveries + 4, ActionMailer::Base.deliveries.size
+    # only one, global message is sent
+    assert_equal num_deliveries + 1, ActionMailer::Base.deliveries.size
   end
 end
