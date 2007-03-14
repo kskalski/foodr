@@ -6,6 +6,13 @@ class Order < ActiveRecord::Base
   has_many :order_positions, :order => 'material_id', :dependent => :delete_all
   belongs_to :supplier
   
+  STATE_NEW       = 1
+  STATE_SENT      = 2
+  STATE_CONFIRMED = 3
+  STATE_RECEIVED  = 4
+  
+  before_create { |me| me.state = STATE_NEW }
+  
   def material_stats
     ord = OrderPosition.count(:conditions => "order_id = #{id}", :group => :material_id)
     return ord.map {
@@ -20,11 +27,14 @@ class Order < ActiveRecord::Base
   def release
     mail = FoodMailer::create_order(supplier.email, orderer, material_stats)
     mail.reply_to = orderer
-    return FoodMailer::deliver(mail)
+    msg = FoodMailer::deliver(mail)
+    update_attribute(:state, STATE_SENT)
+    return msg
   end
   
   def received
     recip = order_positions.map { |pos| pos.receiver_email }
     FoodMailer::deliver_received(recip, supplier.name, orderer)
+    update_attribute(:state, STATE_RECEIVED)
   end
 end

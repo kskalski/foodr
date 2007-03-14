@@ -2,9 +2,11 @@
   <b>Supplier:</b> <%=h @order.supplier.name %>
 </p>
 <% for column in Order.content_columns %>
+<% if column.name != 'state' %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @order.send(column.name) %>
 </p>
+<% end %>
 <% end %>
 
 <% if !@order.order_positions.empty? %>
@@ -49,10 +51,13 @@
 
 <br />
 
-<%= link_to 'New position', :controller => 'order_positions', :action => 'new', :order => @order %> |
-<%= link_to 'Send order', { :action => 'send_order', :id => @order }, :confirm => 'Really send order?' %> |
-<%= link_to 'Mark as received', { :action => 'received', :id => @order }, :confirm => 'You mean FOOD IS THERE?' %> 
-
+<% if @order.state == Order::STATE_NEW %>
+  <%= link_to 'New position', :controller => 'order_positions', :action => 'new', :order => @order %> |
+  <%= link_to 'Send order', { :action => 'send_order', :id => @order }, :confirm => 'Really send order?' %> |
+<% end %>  
+<% if @order.state == Order::STATE_SENT || @order.state == Order::STATE_CONFIRMED %>
+  <%= link_to 'Mark as received', { :action => 'received', :id => @order }, :confirm => 'You mean FOOD IS THERE?' %> 
+<% end %>  
 
 <hr/>
 
