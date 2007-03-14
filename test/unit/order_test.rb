@@ -6,8 +6,10 @@ class OrderTest < Test::Unit::TestCase
   def test_release
     order = Order.find(1)
     num_deliveries = FoodMailer.deliveries.size
+    assert_equal Order::STATE_NEW, order.state
     order.release
     assert_equal num_deliveries + 1, ActionMailer::Base.deliveries.size
+    assert_equal Order::STATE_SENT, order.state
   end
   
   def test_sumworth
@@ -30,8 +32,10 @@ class OrderTest < Test::Unit::TestCase
   def test_received
     order = Order.find(orders(:sumworth).id)
     num_deliveries = FoodMailer.deliveries.size
+    assert_equal Order::STATE_NEW, order.state
     order.received
     # only one, global message is sent
     assert_equal num_deliveries + 1, ActionMailer::Base.deliveries.size
+    assert_equal Order::STATE_RECEIVED, order.state
   end
 end

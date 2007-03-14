@@ -4,10 +4,12 @@ first:
   delivery_date: 2007-03-01
   supplier_id: 1
   orderer: kskalski@joop.jo
+  state: 1
 
 sumworth:
   id: 2
   delivery_date: 2007-03-01
   supplier_id: 2
   orderer: kskalski@joop.jo
+  state: 1
   

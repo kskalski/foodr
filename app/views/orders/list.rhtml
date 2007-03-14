@@ -14,7 +14,7 @@
 <% for order in @orders %>
   <tr>
   <% for column in Order.content_columns %>
-    <% if !['comments'].include?(column.name) %>
+    <% if !['comments', 'state'].include?(column.name) %>
       <td><%=h order.send(column.name) %></td>
     <% end %>
   <% end %>

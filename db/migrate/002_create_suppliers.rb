@@ -20,13 +20,13 @@ class CreateSuppliers < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :order_positions, :material_price, :float
-    change_column :order_positions, :material_id, :integer
-    rename_column :order_positions, :material, :material_id
-    change_column :orders, :supplier_id, :integer
-    rename_column :orders, :supplier, :supplier_id
+    remove_column :order_positions, :material_price, :float
+    change_column :order_positions, :material_id, :string
+    rename_column :order_positions, :material_id, :material
+    change_column :orders, :supplier_id, :string
+    rename_column :orders, :supplier_id, :supplier
 
-    drop_table :dishes
+    drop_table :materials
     drop_table :suppliers
   end
 end
