@@ -1,4 +1,43 @@
-body { background-color: #fff; color: #333; }
+#header {
+	position:absolute;
+	top:40px;
+	left:20px;
+	width: 80%;
+	padding:15px;
+	border:1px dashed #333;
+	background-color:#FFDFBF;
+}
+
+#user {
+    top:40%;
+	left: 90%;
+	position:absolute;
+  	text-align: right;
+}
+
+#content {
+    top:135px;
+    left: 175px;
+	position:absolute;
+	text-align:left;
+	padding:15px;
+	border:1px dashed #333;
+	background-color:#FFDFBF;
+}
+
+
+#menu {
+	position:absolute;
+	top:135px;
+	left:20px;
+	width:120px;
+	padding:10px;
+	border:1px dashed #333;
+	background-color:#FFDFBF;
+}
+
+
+body { background-color: #fff; color: #000; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -13,8 +52,8 @@ pre {
 }
 
 a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:visited { color: #000; }
+a:hover { color: #0066B3; }
 
 .fieldWithErrors {
   padding: 2px;

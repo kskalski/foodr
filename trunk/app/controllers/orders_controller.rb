@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @order.orderer = current_user.email unless !logged_in?
     @all_suppliers = Supplier.find(:all, :order => 'name')
   end
 

@@ -1,24 +1,36 @@
 <html>
 <head>
-  <title>Orders: <%= controller.action_name %></title>
+  <title>Foodr: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'table' %>  
 </head>
 <body>
 
-<div id = 'menu'>
+<div id = 'header'>
   <h1>Foodr</h1>
-  <%= link_to 'Orders', :action => 'list', :controller => 'orders' %> |
-  <%= link_to 'Suppliers', :action => 'list', :controller => 'suppliers' %>
-</div>
-
-<hr/>
+  <div id = 'user'>
+    <% if logged_in? %>
+        <%= link_to 'Log out', :action => 'logout', :controller => 'account' %> 
+    <% else %>
+        <%= link_to 'Log in', :action => 'login', :controller => 'account' %> 
+    <% end %>
+  </div>
+</div>  
 
 <p style="color: green"><%= flash[:notice] %></p>
 
-<%= yield  %>
 
-<hr/>
+<div id = 'menu'>
+  <ul>
+    <li><%= link_to 'Orders', :action => 'list', :controller => 'orders' %> </li>
+    <li> <%= link_to 'Suppliers', :action => 'list', :controller => 'suppliers' %> </li>
+  </ul>
+</div>
+
+
+<div id = 'content'>
+<%= yield  %>
+</div>
 
 </body>
 </html>
