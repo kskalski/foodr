@@ -3,7 +3,7 @@
 <table>
   <tr>
   <% for column in Order.content_columns %>
-    <% if !['comments'].include?(column.name) %>
+    <% if !['comments', 'state'].include?(column.name) %>
       <th><%= column.human_name %></th>
     <% end %>
   <% end %>
