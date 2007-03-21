@@ -23,6 +23,7 @@ class OrderPositionsController < ApplicationController
   def new
     remember_order()
     @order_position = OrderPosition.new
+    @order_position.receiver_email = current_user.email unless !logged_in?
     @all_materials = Material.find(:all, :conditions => "supplier_id = (SELECT supplier_id FROM orders WHERE id = #{@order})", :order => 'name')
   end
 
