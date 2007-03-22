@@ -10,7 +10,7 @@
   <h1>Foodr</h1>
   <div id = 'user'>
     <% if logged_in? %>
-        <%= link_to 'Log out', :action => 'logout', :controller => 'account' %> 
+        <%= current_user.login %> | <%= link_to 'Log out', :action => 'logout', :controller => 'account' %> 
     <% else %>
         <%= link_to 'Log in', :action => 'login', :controller => 'account' %> 
     <% end %>
