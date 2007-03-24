@@ -1,0 +1,25 @@
+<h2>Welcome!</h2>
+
+<p>
+  Hello <b><%=h current_user.login %></b>!
+</p>
+<p>
+  What do you want to eat today?
+</p>
+
+<h2>Your financial status against others:</h2>
+
+<% if @mydebt_positions.empty? %>
+ <p>
+  Whoo, you are an honest eater! No debts.
+ </p>
+<% else %>
+  <table>
+    <tr><th>Person</th><th>Value</th><th>Action</th></tr>
+  <% @mydebt_positions.each_index { |i| entry = @mydebt_positions[i] %>
+    <tr><td><%=h entry['person'] %></td><td><%= entry['total'] %></td>
+        <td><%= link_to 'Zero debt', :action => :zero_debt, :method => :post, :confirm => 'Are you sure?', :against => i %></td>
+    </tr>
+  <% } %>
+  </table>
+<% end %>  

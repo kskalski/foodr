@@ -23,7 +23,10 @@
 <div id = 'menu'>
   <ul>
     <li><%= link_to 'Orders', :action => 'list', :controller => 'orders' %> </li>
-    <li> <%= link_to 'Suppliers', :action => 'list', :controller => 'suppliers' %> </li>
+    <li><%= link_to 'Suppliers', :action => 'list', :controller => 'suppliers' %> </li>
+    <% if logged_in? %>
+      <li><%= link_to 'Finance', :action => 'finance', :controller => 'account' %> </li>
+    <% end %>
   </ul>
 </div>
 

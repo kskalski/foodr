@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   
   has_many :order_positions, :order => 'material_id', :dependent => :delete_all
   belongs_to :supplier
+  belongs_to :created_by, :class_name => "User", :foreign_key => "created_by"
   
   STATE_NEW       = 1
   STATE_SENT      = 2
