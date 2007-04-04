@@ -52,6 +52,24 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+  def get_finance_analysis
+    if email.nil?
+      []
+    else
+      ActiveRecord::Base.connection.select_all(
+        "SELECT person, sum(money) AS total FROM ( \n"+
+        "    SELECT orderer AS person, -debt_for_orderer as money \n"+
+        "      FROM order_positions, orders \n"+
+        "      WHERE debt_for_orderer <> 0 AND receiver_email = '#{email}' AND orders.id = order_positions.order_id \n"+
+        "  UNION ALL \n"+
+        "    SELECT receiver_email AS person, debt_for_orderer as money \n"+
+        "      FROM order_positions, orders \n"+
+        "      WHERE debt_for_orderer <> 0 AND orderer = '#{email}' AND orders.id = order_positions.order_id \n"+
+        ") c\n"+
+        "GROUP BY person HAVING total <> 0")
+    end
+  end
+
   protected
     # before filter 
     def encrypt_password

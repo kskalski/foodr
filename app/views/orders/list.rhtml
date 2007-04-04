@@ -4,11 +4,15 @@
 <% for order in [nil] + @orders %>
   <tr>
   <% for column in Order.content_columns %>
-   <% if !['comments', 'state', 'created_by'].include?(column.name) %>  
+   <% if !['comments', 'created_by'].include?(column.name) %>  
      <% if order.nil? %>
       <th><%= column.human_name %></th>   
      <% else %>
-      <td><%=h order.send(column.name) %></td>
+      <% val = order.send(column.name)  %>
+      <td><%= case column.name 
+                when 'state' then h format_state val
+                else h val
+              end %></td>
      <% end %>
    <% end %>
   <% end %>
@@ -19,15 +23,15 @@
        <td><%=h order.supplier.name %></td>
     <td><%= link_to 'Show', :action => 'show', :id => order %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => order %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => order }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => order }, :confirm => 'Are you sure?', :method => :post if order.state == Order::STATE_NEW %></td>
   <% end %>  
   </tr>
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @order_pages.current.previous } if @order_pages.current.previous %>
-<%= link_to 'Next page', { :page => @order_pages.current.next } if @order_pages.current.next %> 
+<%= link_to 'New order', :action => 'new' %> 
 
-<br />
-
-<%= link_to 'New order', :action => 'new' %>
+<div class='prevnext_links'>
+  <%= link_to 'Previous page', { :page => @order_pages.current.previous } if @order_pages.current.previous %>
+  <%= link_to 'Next page', { :page => @order_pages.current.next } if @order_pages.current.next %> 
+</div>

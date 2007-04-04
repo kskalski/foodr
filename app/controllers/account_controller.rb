@@ -7,20 +7,7 @@ class AccountController < ApplicationController
   # gives summary of debts, where we at some actor
   def finance
     if logged_in? 
-      @mydebt_positions = []
-      if !current_user.email.nil?
-       @mydebt_positions = ActiveRecord::Base.connection.select_all(
-        "SELECT person, sum(money) AS total FROM ( \n"+
-        "    SELECT orderer AS person, -debt_for_orderer as money \n"+
-        "      FROM order_positions, orders \n"+
-        "      WHERE debt_for_orderer <> 0 AND receiver_email = '#{current_user.email}' AND orders.id = order_positions.order_id \n"+
-        "  UNION \n"+
-        "    SELECT receiver_email AS person, debt_for_orderer as money \n"+
-        "      FROM order_positions, orders \n"+
-        "      WHERE debt_for_orderer <> 0 AND orderer = '#{current_user.email}' AND orders.id = order_positions.order_id \n"+
-        ") c\n"+
-        "GROUP BY person HAVING total <> 0")
-      end
+      @mydebt_positions = current_user.get_finance_analysis
       session[:debt] = @mydebt_positions
     else 
       if User.count > 0

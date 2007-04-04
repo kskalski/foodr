@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
     @order = Order.new(params[:order])
     if @order.save
       flash[:notice] = 'Order was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'show', :id => @order
     else
       @all_suppliers = Supplier.find(:all, :order => 'name')
       render :action => 'new'
@@ -56,7 +56,8 @@ class OrdersController < ApplicationController
   
   def send_order
     @order = Order.find(params[:id])
-    flash[:notice] = @order.release()
+    @order.release()
+    flash[:notice] = 'Order sent!'
     redirect_to :action => 'show', :id => @order
   end
   
