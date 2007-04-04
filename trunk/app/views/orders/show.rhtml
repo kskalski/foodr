@@ -2,9 +2,13 @@
   <b>Supplier:</b> <%=h @order.supplier.name %>
 </p>
 <% for column in Order.content_columns %>
-<% if !['created_by', 'state'].include? column.name %>
+<% if !['created_by'].include? column.name %>
 <p>
-  <b><%= column.human_name %>:</b> <%=h @order.send(column.name) %>
+  <% val = @order.send(column.name) %>
+  <b><%= column.human_name %>:</b> <%= case column.name
+                                         when 'state' then h format_state val
+                                         else h val
+                                       end %>
 </p>
 <% end %>
 <% end %>

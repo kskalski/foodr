@@ -17,8 +17,8 @@
   <table>
     <tr><th>Person</th><th>Value</th><th>Action</th></tr>
   <% @mydebt_positions.each_index { |i| entry = @mydebt_positions[i] %>
-    <tr><td><%=h entry['person'] %></td><td><%= entry['total'] %></td>
-        <td><%= link_to 'Zero debt', :action => :zero_debt, :method => :post, :confirm => 'Are you sure?', :against => i %></td>
+    <tr><td><%=h entry['person'] %></td><td><%= number_to_currency(entry['total'], { :unit => 'PLN ', :precision => 2 }) %></td>
+        <td><%= link_to 'Zero debt', :action => :zero_debt, :method => :post, :against => i, :confirm => 'Are you sure?'  %></td>
     </tr>
   <% } %>
   </table>

@@ -53,7 +53,7 @@ class OrdersControllerTest < Test::Unit::TestCase
     post :create, :order => { 'delivery_date(1i)' => "2007", 'delivery_date(2i)' => '1', 'delivery_date(3i)' => '1', :supplier_id => '1', :orderer => "kskalski@axit.pl" }
 
     assert_response :redirect
-    assert_redirected_to :action => 'list'
+    assert_redirected_to :action => 'show'
 
     assert_equal num_orders + 1, Order.count
   end
