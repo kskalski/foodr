@@ -1,8 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 first:
   id: 1
+  email: fff@fff.pl
   name: Lunch Service
   
 sumworth:
   id: 2
+  email: fff@fff.pl
   name: With materials

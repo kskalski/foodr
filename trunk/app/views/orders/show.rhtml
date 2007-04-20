@@ -6,7 +6,9 @@
 <p>
   <% val = @order.send(column.name) %>
   <b><%= column.human_name %>:</b> <%= case column.name
-                                         when 'state' then h format_state val
+                                         when 'state' then format_state val
+                                         when 'orderer' then auto_link(h(val))
+                                         when 'comments' then '<br/>' + auto_link(nl2br(h(val)))
                                          else h val
                                        end %>
 </p>
@@ -61,11 +63,11 @@
 <% if @order.state == Order::STATE_NEW %>
   <%= link_to 'New position', :controller => 'order_positions', :action => 'new', :order => @order %> |
   <% if !@order.order_positions.empty? %>
-    <%= link_to 'Send order', { :action => 'send_order', :id => @order }, :confirm => 'Really send order?' %> |
+    <%= link_to 'Send order', { :action => 'send_order', :id => @order }, :method => :post, :confirm => 'Really send order?' %> |
   <% end %>
 <% end %>  
 <% if @order.state == Order::STATE_SENT || @order.state == Order::STATE_CONFIRMED %>
-  <%= link_to 'Mark as received', { :action => 'received', :id => @order }, :confirm => 'You mean FOOD IS THERE?' %> 
+  <%= link_to 'Mark as received', { :action => 'received', :id => @order }, :method => :post, :confirm => 'You mean FOOD IS THERE?' %> 
 <% end %>  
 
 <hr/>
