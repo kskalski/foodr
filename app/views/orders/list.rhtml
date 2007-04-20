@@ -10,7 +10,8 @@
      <% else %>
       <% val = order.send(column.name)  %>
       <td><%= case column.name 
-                when 'state' then h format_state val
+                when 'state' then format_state val
+                when 'orderer' then auto_link(h(val))
                 else h val
               end %></td>
      <% end %>

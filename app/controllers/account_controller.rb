@@ -23,7 +23,7 @@ class AccountController < ApplicationController
     debt = session[:debt]
     if !other_user.nil? && !debt.nil? && other_user >= 0 && other_user < debt.length
       other_user = debt[other_user]['person']
-      poses = OrderPosition.find(:all, :conditions => ['receiver_email IN (?,?)', other_user, current_user])
+      poses = OrderPosition.find(:all, :conditions => ['abs(debt) > 0.001 AND receiver_email IN (?,?)', other_user, current_user])
       poses.each { |p|
         if (p.order.orderer == other_user && p.receiver_email == current_user.email || 
            p.order.orderer == current_user.email && p.receiver_email == other_user)

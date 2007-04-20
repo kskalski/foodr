@@ -26,6 +26,7 @@ class Order < ActiveRecord::Base
   end
     
   def release
+    return if supplier.email.nil? || supplier.email.length == 0
     mail = FoodMailer::create_order(supplier.email, orderer, material_stats)
     mail.reply_to = orderer
     msg = FoodMailer::deliver(mail)
