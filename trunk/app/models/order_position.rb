@@ -6,4 +6,11 @@ class OrderPosition < ActiveRecord::Base
   belongs_to :order
   belongs_to :material
   belongs_to :created_by, :class_name => "User", :foreign_key => "created_by"  
+  
+  protected
+    def validate_on_create
+      if order.state > Order::STATE_NEW
+        errors.add(:order_id, 'has been already sent')
+      end
+    end
 end
