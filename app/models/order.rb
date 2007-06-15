@@ -26,15 +26,19 @@ class Order < ActiveRecord::Base
   end
     
   def release
-    return if supplier.email.nil? || supplier.email.length == 0
-    mail = FoodMailer::create_order(supplier.email, orderer, material_stats)
-    mail.reply_to = orderer
-    msg = FoodMailer::deliver(mail)
+    return if state > STATE_SENT || order_positions.empty?
+    
+    unless supplier.email.nil? || supplier.email.length == 0 || 
+      mail = FoodMailer::create_order(supplier.email, orderer, material_stats)
+      mail.reply_to = orderer
+      msg = FoodMailer::deliver(mail)
+    end
     update_attribute(:state, STATE_SENT)
     return msg
   end
   
   def received
+    return if order_positions.empty?
     recip = order_positions.map { |pos| pos.receiver_email }
     FoodMailer::deliver_received(recip, supplier.name, orderer)
     update_attribute(:state, STATE_RECEIVED)

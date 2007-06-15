@@ -24,7 +24,7 @@ class OrderPositionsController < ApplicationController
     remember_order()
     @order_position = OrderPosition.new
     @order_position.receiver_email = current_user.email unless !logged_in?
-    @all_materials = Material.find(:all, :conditions => "supplier_id = (SELECT supplier_id FROM orders WHERE id = #{@order})", :order => 'name')
+    fetch_materials
   end
 
   def create
@@ -35,7 +35,7 @@ class OrderPositionsController < ApplicationController
       flash[:notice] = 'Order position was successfully created.'
       redirect_to :action => 'show', :controller => 'orders', :id => @order
     else
-      @all_materials = Material.find(:all, :conditions => "supplier_id = (SELECT supplier_id FROM orders WHERE id = #{@order})", :order => 'name')
+      fetch_materials
       render :action => 'new'
     end
   end
@@ -43,7 +43,7 @@ class OrderPositionsController < ApplicationController
   def edit
     remember_order()
     @order_position = OrderPosition.find(params[:id])
-    @all_materials = Material.find(:all, :conditions => "supplier_id = (SELECT supplier_id FROM orders WHERE id = #{@order})", :order => 'name')
+    fetch_materials
   end
 
   def update
@@ -55,7 +55,7 @@ class OrderPositionsController < ApplicationController
       flash[:notice] = 'Order position was successfully updated.'
       redirect_to :action => 'show', :controller => 'orders', :id => @order
     else
-      @all_materials = Material.find(:all, :conditions => "supplier_id = (SELECT supplier_id FROM orders WHERE id = #{@order})", :order => 'name')
+      fetch_materials
       render :action => 'edit'
     end
   end
@@ -64,4 +64,9 @@ class OrderPositionsController < ApplicationController
     OrderPosition.find(params[:id]).destroy
     redirect_to :action => 'show', :controller => 'orders', :id => params[:order]
   end
+  
+  private
+    def fetch_materials
+      @all_materials = Material.find(:all, :conditions => ['supplier_id = (SELECT supplier_id FROM orders WHERE id = ?)', @order], :order => 'name')
+    end
 end
