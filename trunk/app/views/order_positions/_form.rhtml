@@ -6,7 +6,10 @@
 
 <p><label for="order_position_material_id">Material</label><br/>
 <select id="order_position_material_id" name="order_position[material_id]">
-  <%= options_from_collection_for_select @all_materials, :id, :name, @order_position.material_id %>
+  <% mats = @all_materials.collect {
+        |m| [m.id, "#{m.name} - #{number_to_currency(m.price, { :unit => 'PLN ', :precision => 2 })}"]
+      } %>
+  <%= options_from_collection_for_select mats, :first, :last, @order_position.material_id %>
 </select></p>
 
 <p><label for="order_position_debt_for_orderer">Debt for orderer</label><br/>

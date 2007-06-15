@@ -18,9 +18,8 @@
 <% if !@order.order_positions.empty? %>
 
 <h2>Statistics</h2>
-
   <p>
-    <b>Total worth:</b> <%= @order.total_value %>
+    <b>Total worth:</b> <%= number_to_currency(@order.total_value, { :unit => 'PLN ', :precision => 2 }) %>
   </p>
 
   <table>
