@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
   def release
     return if state > STATE_SENT || order_positions.empty?
     
-    unless supplier.email.nil? || supplier.email.length == 0 || 
+    unless supplier.email.nil? || supplier.email.length == 0 
       mail = FoodMailer::create_order(supplier.email, orderer, material_stats)
       mail.reply_to = orderer
       msg = FoodMailer::deliver(mail)
