@@ -21,7 +21,7 @@
     <th>Supplier</th>
     <th colspan='3'>Action</th>
   <% else %>
-       <td><%=h order.supplier.name %></td>
+       <td><%=h order.supplier.name unless order.supplier.nil? %></td>
     <td><%= link_to 'Show', :action => 'show', :id => order %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => order %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => order }, :confirm => 'Are you sure?', :method => :post if order.state == Order::STATE_NEW %></td>
