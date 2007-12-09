@@ -1,5 +1,6 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :suppliers	
   cattr_accessor :current_user
 
   # Virtual attribute for the unencrypted password
