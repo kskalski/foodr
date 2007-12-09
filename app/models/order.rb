@@ -43,4 +43,10 @@ class Order < ActiveRecord::Base
     FoodMailer::deliver_received(recip, supplier.name, orderer)
     update_attribute(:state, STATE_RECEIVED)
   end
+  
+  def notification
+    return if supplier.users.empty?
+    recip = supplier.users.map { |user| user.email }
+    FoodMailer::deliver_notification(recip, self)
+  end  
 end

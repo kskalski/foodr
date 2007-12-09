@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     if @order.save
+      @order.notification()
       flash[:notice] = 'Order was successfully created.'
       redirect_to :action => 'show', :id => @order
     else

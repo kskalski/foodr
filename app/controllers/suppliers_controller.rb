@@ -5,7 +5,7 @@ class SuppliersController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
+  verify :method => :post, :only => [ :destroy, :create, :update, :watch, :ignore ],
          :redirect_to => { :action => :list }
 
   def list
@@ -46,6 +46,20 @@ class SuppliersController < ApplicationController
 
   def destroy
     Supplier.find(params[:id]).destroy
+    redirect_to :action => 'list'
+  end
+    
+  def watch
+    @supplier = Supplier.find(params[:id])	
+    @supplier.add_users(User.find(current_user.id))
+    @supplier.save    
+    redirect_to :action => 'list'
+  end
+
+  def ignore
+    @supplier = Supplier.find(params[:id])	
+    @supplier.remove_users(User.find(current_user.id))
+    @supplier.save    
     redirect_to :action => 'list'
   end
 end
